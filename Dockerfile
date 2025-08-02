@@ -1,6 +1,7 @@
 FROM php:5-apache
 
-COPY sources.list /etc/apt/sources.list
+COPY config/sources.list /etc/apt/sources.list
+COPY config/ports.conf /etc/apache2/ports.conf
 
 RUN cat /etc/apt/sources.list
 RUN apt-get install debian-archive-keyring
@@ -28,6 +29,6 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2/
 ENV APACHE_PID_FILE /var/apache.pid
 
-EXPOSE 80 443
+EXPOSE 8080 8443
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
